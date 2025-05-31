@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=WDXL+Lubrifont+TC&display=swap");
 
+:root {
+  --dice-size: 150px;
+  --dice-position: 75px;
+  --dot-position: 37.5px;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -28,7 +34,7 @@ body {
 }
 
 .controller {
-  margin-top: 20vh;
+  margin-top: 13vh;
 }
 
 .history {
@@ -51,15 +57,15 @@ table {
 }
 
 th {
-  width: 20vw;
+  width: 15vw;
   height: 0.2vh;
-  font-size: 2vw;
+  font-size: 2.4vw;
   border: 1px solid black;
 }
 td {
   text-align: center;
   height: 8vh;
-  font-size: 1.8vw;
+  font-size: 2.3vw;
   border: 1px solid #000;
 }
 
@@ -82,7 +88,7 @@ td:last-child {
 
 .roll {
   font-family: "Cherry Bomb One", system-ui;
-  font-size: clamp(30px, 2vw, 100px);
+  font-size: 2.8vw;
   background-color: #000;
   border: 0px;
   border-radius: 30px;
@@ -108,7 +114,7 @@ td:last-child {
   padding: 0.7%;
   padding-left: 2%;
   padding-right: 2%;
-  font-size: clamp(30px, 1.7vw, 100px);
+  font-size: 2.5vw;
   cursor: pointer;
 }
 
@@ -133,18 +139,20 @@ td:last-child {
 }
 
 .question {
-  font-size: clamp(50px, 4vw, 150px);
+  text-align: center;
+  font-size: 4.1vw;
 }
 
 .result.container {
   height: 15vh;
-  font-size: 7vh;
+  font-size: 5vw;
   padding: 2vh;
+  margin-bottom: 8vh;
 }
 
 .dice {
-  width: 150px;
-  height: 150px;
+  width: var(--dice-size);
+  height: var(--dice-size);
   transform-style: preserve-3d;
   transform: rotateY(185deg) rotateX(150deg) rotateZ(315deg);
   animation: rotate 5s linear infinite;
@@ -174,51 +182,63 @@ td:last-child {
 }
 
 .one {
-  transform: translateZ(75px);
+  transform: translateZ(var(--dice-position));
   &:before {
     background-color: red;
   }
 }
 
 .two {
-  transform: translateX(-75px) rotateY(-90deg);
+  transform: translateX(calc(-1 * var(--dice-position))) rotateY(-90deg);
   &:before {
     background: transparent;
-    box-shadow: #000 -37.5px -37.5px 0px 0px, #000 37.5px 37.5px 0px 0px;
+    box-shadow: #000 calc(-1 * var(--dot-position))
+        calc(-1 * var(--dot-position)) 0px 0px,
+      #000 var(--dot-position) var(--dot-position) 0px 0px;
   }
 }
 
 .three {
-  transform: translateY(75px) rotateX(90deg);
+  transform: translateY(var(--dice-position)) rotateX(90deg);
   &:before {
-    box-shadow: #000 -37.5px 37.5px 0px 0px, #000 37.5px -37.5px 0px 0px;
+    box-shadow: #000 calc(-1 * var(--dot-position)) var(--dot-position) 0px 0px,
+      #000 var(--dot-position) calc(-1 * var(--dot-position)) 0px 0px;
   }
 }
 
 .four {
-  transform: translateY(-75px) rotateX(90deg);
+  transform: translateY(calc(-1 * var(--dice-position))) rotateX(90deg);
   &:before {
     background: transparent;
-    box-shadow: #000 -37.5px 37.5px 0px 0px, #000 -37.5px -37.5px 0px 0px,
-      #000 37.5px 37.5px 0px 0px, #000 37.5px -37.5px 0px 0px;
+    box-shadow: #000 calc(-1 * var(--dot-position)) var(--dot-position) 0px 0px,
+      #000 calc(-1 * var(--dot-position)) calc(-1 * var(--dot-position)) 0px 0px,
+      #000 var(--dot-position) var(--dot-position) 0px 0px,
+      #000 var(--dot-position) calc(-1 * var(--dot-position)) 0px 0px;
   }
 }
 
 .five {
-  transform: translateX(75px) rotateY(90deg);
+  transform: translateX(var(--dice-position)) rotateY(90deg);
   &:before {
-    box-shadow: #000 -37.5px -37.5px 0px 0px, #000 -37.5px 37.5px 0px 0px,
-      #000 37.5px -37.5px 0px 0px, #000 37.5px 37.5px 0px 0px;
+    box-shadow: #000 calc(-1 * var(--dot-position))
+        calc(-1 * var(--dot-position)) 0px 0px,
+      #000 calc(-1 * var(--dot-position)) var(--dot-position) 0px 0px,
+      #000 var(--dot-position) calc(-1 * var(--dot-position)) 0px 0px,
+      #000 var(--dot-position) var(--dot-position) 0px 0px;
   }
 }
 
 .six {
-  transform: translateZ(-75px);
+  transform: translateZ(calc(-1 * var(--dice-position)));
   &:before {
     background: transparent;
-    box-shadow: #000 -37.5px -37.5px 0px 0px, #000 -37.5px 0px 0px 0px,
-      #000 -37.5px 37.5px 0px 0px, #000 37.5px -37.5px 0px 0px,
-      #000 37.5px 0px 0px 0px, #000 37.5px 37.5px 0px 0px;
+    box-shadow: #000 calc(-1 * var(--dot-position))
+        calc(-1 * var(--dot-position)) 0px 0px,
+      #000 calc(-1 * var(--dot-position)) 0px 0px 0px,
+      #000 calc(-1 * var(--dot-position)) var(--dot-position) 0px 0px,
+      #000 var(--dot-position) calc(-1 * var(--dot-position)) 0px 0px,
+      #000 var(--dot-position) 0px 0px 0px,
+      #000 var(--dot-position) var(--dot-position) 0px 0px;
   }
 }
 
@@ -251,4 +271,94 @@ td:last-child {
 
 .shake {
   animation: shake 0.4s;
+}
+
+@media screen and (max-width: 700px) {
+  .question {
+    font-size: 8vw;
+  }
+  .guess {
+    font-size: 5vw;
+  }
+  .roll {
+    font-size: 5vw;
+  }
+
+  .root {
+    --dice-size: 280px;
+    --dice-position: 140px;
+    --dot-position: 67.5px;
+  }
+
+  .result.container {
+    font-size: 10vw;
+  }
+
+  th {
+    font-size: 5.1vw;
+    width: 20vw;
+  }
+  td {
+    font-size: 5vw;
+  }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+  .question {
+    font-size: 6vw;
+  }
+  .guess {
+    font-size: 4vw;
+  }
+  .roll {
+    font-size: 5vw;
+  }
+
+  .root {
+    --dice-size: 280px;
+    --dice-position: 140px;
+    --dot-position: 67.5px;
+  }
+
+  .result.container {
+    font-size: 10vw;
+  }
+
+  th {
+    font-size: 4vw;
+    width: 20vw;
+  }
+  td {
+    font-size: 3.6vw;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1300px) {
+  .question {
+    font-size: 5vw;
+  }
+  .guess {
+    font-size: 3vw;
+  }
+  .roll {
+    font-size: 3.5vw;
+  }
+
+  .result.container {
+    font-size: 6vw;
+  }
+
+  .root {
+    --dice-size: 160px;
+    --dice-position: 80px;
+    --dot-position: 67.5px;
+  }
+
+  th {
+    font-size: 3.2vw;
+    width: 17vw;
+  }
+  td {
+    font-size: 3vw;
+  }
 }
