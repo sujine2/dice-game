@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roll The Dice</title>
+    <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container header">
+      <div class="question">
+        Will it be higher, lower, or equal to
+        <span id="number"></span>?
+        <div class="guess-button">
+          <button class="guess lower" onclick="selectResult('lower')">
+            lower
+          </button>
+          <button class="guess equal" onclick="selectResult('equal')">
+            equal
+          </button>
+          <button class="guess higher" onclick="selectResult('higher')">
+            higher
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container result">
+      <div class="roll-result"></div>
+    </div>
+    <div class="container">
+      <div class="dice">
+        <div class="side one"></div>
+        <div class="side two"></div>
+        <div class="side three"></div>
+        <div class="side four"></div>
+        <div class="side five"></div>
+        <div class="side six"></div>
+      </div>
+    </div>
+
+    <div class="container controller">
+      <div class="dice-button">
+        <button class="roll" onclick="handleRoll()">Roll!!</button>
+      </div>
+    </div>
+
+    <div class="container history">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th class="target">SELECT</th>
+            <th class="target">TARGET</th>
+            <th class="target">ROLL</th>
+            <th class="value">RESULT</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>
