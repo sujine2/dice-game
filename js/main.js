@@ -1,4 +1,5 @@
-const button = document.querySelector(".roll");
+/* Tag constant value */
+const button = document.querySelector(".roll-button");
 const dice = document.querySelector(".dice");
 const result = document.querySelector(".result");
 const question = document.querySelector(".question");
@@ -18,20 +19,31 @@ let userGuess = null;
 let targetNum = null;
 let historyCount = 0;
 
+/**
+ * Get a random number on initial page load
+ */
 window.onload = function () {
   getRandomNumber();
 };
 
+/**
+ * Generate a random number and display it in the element with ID 'number
+ */
 function getRandomNumber() {
   const random = Math.floor(Math.random() * 6) + 1; // 1~6
   targetNum = random;
   document.getElementById("number").textContent = random;
 }
 
+/**
+ * Add the selected class to the selected `choice` and
+ * remove the selected class from all other guess buttons
+ *
+ * @param {*} choice Guess button selected by the user - lower/equal/higher
+ */
 function selectResult(choice) {
   userGuess = choice;
-
-  document.querySelectorAll(".guess").forEach((btn) => {
+  document.querySelectorAll(".guess-button").forEach((btn) => {
     btn.classList.remove("selected");
   });
   document.querySelector(`.${choice}`).classList.add("selected");
@@ -39,21 +51,26 @@ function selectResult(choice) {
   button.style.display = "block";
 }
 
+/**
+ * 	Main handle dice roll
+ */
 let initialized = false;
 let rollResult = null;
 async function handleRoll() {
-  document.querySelectorAll(".guess").forEach((btn) => {
+  document.querySelectorAll(".guess-button").forEach((btn) => {
     if (!btn.classList.contains(userGuess)) {
       btn.disabled = true;
     }
   });
 
+  // If it's the first roll, reset the rotating dice to its initial position
   if (!initialized) {
     initialized = await initDice();
   } else {
     result.textContent = "";
   }
 
+  // Determine win or loss based on the user's guess
   setTimeout(async () => {
     rollResult = await rollDice();
 
@@ -71,14 +88,15 @@ async function handleRoll() {
       default:
         result.textContent = "";
     }
-    console.log(
-      `result: ${rollResult}, select ${userGuess}, target: ${targetNum}`
-    );
+    // console.log(
+    //   `result: ${rollResult}, select ${userGuess}, target: ${targetNum}`
+    // );
 
     setTimeout(() => {
       finalResult = isWin ? "Win" : "Lose";
       result.textContent = finalResult;
 
+      // Show confetti effect if the user win
       if (isWin) {
         confetti({
           particleCount: 200,
@@ -86,40 +104,45 @@ async function handleRoll() {
           origin: { y: 0.6 },
         });
       } else {
-        const elements = [
-          result,
-          question,
-          document.querySelector(".dice-button"),
-        ];
+        // Play shake animation if the user loses (add shake class to element)
+        const elements = [result, question, document.querySelector(".roll")];
 
         elements.forEach((el) => triggerShake(el));
-
         setTimeout(() => {
           elements.forEach((el) => el.classList.remove("shake"));
         }, 1500);
       }
+
+      // Show history table and add data
       table.style.display = "block";
       addHistoryRow(userGuess, targetNum, rollResult, finalResult);
 
-      document.querySelectorAll(".guess").forEach((btn) => {
+      // The guess (lose/equal/higher) cannot be changed while the dice is rolling
+      document.querySelectorAll(".guess-button").forEach((btn) => {
         btn.disabled = false;
       });
-      getRandomNumber();
+
+      // Change taget number
+      setTimeout(() => {
+        getRandomNumber();
+      }, 2000);
     }, 1500);
   }, 200);
 }
 
+/**
+ * Get rotate degree
+ * @returns Result of the roll dice
+ */
 async function rollDice() {
-  // 1~6 중 하나를 랜덤으로 뽑음
+  // Get random face 1 ~ 6
   const face = Math.floor(Math.random() * 6) + 1;
-  // 해당 눈의 각도
+  // Rotation for face
   const [xDeg, yDeg] = FACE_ROTATIONS[face];
 
-  // 자연스러운 회전을 위해 360의 배수만큼 추가 회전
+  // Add an extra rotation by a multiple of 360 degrees for a smooth spin
   const spinX = 360 * (Math.floor(Math.random() * 2) + 1);
   const spinY = 360 * (Math.floor(Math.random() * 2) + 1);
-
-  // transform 적용
   dice.style.transition = "transform 1.2s";
   dice.style.transform = `rotateX(${xDeg + spinX}deg) rotateY(${
     yDeg + spinY
@@ -128,6 +151,10 @@ async function rollDice() {
   return face;
 }
 
+/**
+ * Reset the rotating dice to 0 rotation
+ * @returns Initialization status
+ */
 async function initDice() {
   dice.style.animation = "none";
   dice.style.transition = "transform 1.2s ease-in-out";
@@ -135,12 +162,23 @@ async function initDice() {
   return true;
 }
 
+/**
+ * Add shake class and remove shake class
+ * @param {string} element Tag to shake when lose
+ */
 function triggerShake(element) {
   element.classList.remove("shake");
   void element.offsetWidth;
   element.classList.add("shake");
 }
 
+/**
+ * Add history table row
+ * @param {string} selection low/equal/higher value selected by user
+ * @param {number} target Random target number
+ * @param {number} rollResult Result of the roll
+ * @param {string} result Win / Lose
+ */
 function addHistoryRow(selection, target, rollResult, result) {
   const tbody = document.querySelector(".history-table tbody");
 
@@ -151,7 +189,7 @@ function addHistoryRow(selection, target, rollResult, result) {
 
   const row = document.createElement("tr");
   row.innerHTML = `
-    <td><span class="guess ${selection}">${selection}</span></td>
+    <td><span class="guess-button ${selection}">${selection}</span></td>
     <td>${target}</td>
     <td>${rollResult}</td>
     <td>${result}</td>

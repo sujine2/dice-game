@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=WDXL+Lubrifont+TC&display=swap");
 
+/* variable for responsive web */
 :root {
   --dice-size: 150px;
   --dice-position: 75px;
@@ -16,6 +17,7 @@ body {
   overflow-x: hidden;
 }
 
+/* target number */
 #number {
   color: rgb(255, 255, 255);
   -webkit-text-stroke: 1px black;
@@ -23,25 +25,30 @@ body {
     1px 1px 0 black;
 }
 
+/* basic section */
 .container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* header */
 .header {
   margin-top: 5vh;
 }
 
+/* dice controller */
 .controller {
   margin-top: 13vh;
 }
 
+/* history table wrapper */
 .history {
   margin-top: 10vh;
   min-height: 10vh;
 }
 
+/* Win/lose table */
 .history-table {
   font-family: "WDXL Lubrifont TC", sans-serif;
   background-color: #fff;
@@ -86,7 +93,8 @@ td:last-child {
   border-right: none;
 }
 
-.roll {
+/* roll the dice button */
+.roll-button {
   font-family: "Cherry Bomb One", system-ui;
   font-size: 2.8vw;
   background-color: #000;
@@ -100,14 +108,16 @@ td:last-child {
   display: none;
 }
 
-.guess-button {
+/* guess button wrapper */
+.guess {
   display: flex;
   justify-content: center;
   gap: 5vw;
   margin-top: 3vh;
 }
 
-.guess {
+/* eqaul, higher, lower button */
+.guess-button {
   font-family: "WDXL Lubrifont TC", sans-serif;
   border: 0px;
   border-radius: 30px;
@@ -118,31 +128,36 @@ td:last-child {
   cursor: pointer;
 }
 
-.guess:hover {
+.guess-button:hover {
   outline: 3px solid;
 }
 
-.guess.selected {
+.guess-button.selected {
   outline: 4px solid;
 }
 
+/* lower button */
 .lower {
   background-color: #ebc20a;
 }
 
+/* higher button */
 .higher {
   background-color: #db3939;
 }
 
+/* equal button */
 .equal {
   background-color: #6dd33a;
 }
 
+/* quesstion wrapper */
 .question {
   text-align: center;
   font-size: 4.1vw;
 }
 
+/* print win/lose */
 .result.container {
   height: 15vh;
   font-size: 5vw;
@@ -150,6 +165,7 @@ td:last-child {
   margin-bottom: 8vh;
 }
 
+/* dice css */
 .dice {
   width: var(--dice-size);
   height: var(--dice-size);
@@ -181,6 +197,7 @@ td:last-child {
   }
 }
 
+/* dice face 1 */
 .one {
   transform: translateZ(var(--dice-position));
   &:before {
@@ -188,6 +205,7 @@ td:last-child {
   }
 }
 
+/* dice face 2 */
 .two {
   transform: translateX(calc(-1 * var(--dice-position))) rotateY(-90deg);
   &:before {
@@ -198,6 +216,7 @@ td:last-child {
   }
 }
 
+/* dice face 3 */
 .three {
   transform: translateY(var(--dice-position)) rotateX(90deg);
   &:before {
@@ -206,6 +225,7 @@ td:last-child {
   }
 }
 
+/* dice face 4 */
 .four {
   transform: translateY(calc(-1 * var(--dice-position))) rotateX(90deg);
   &:before {
@@ -217,6 +237,7 @@ td:last-child {
   }
 }
 
+/* dice face 5 */
 .five {
   transform: translateX(var(--dice-position)) rotateY(90deg);
   &:before {
@@ -228,6 +249,7 @@ td:last-child {
   }
 }
 
+/* dice face 6 */
 .six {
   transform: translateZ(calc(-1 * var(--dice-position)));
   &:before {
@@ -242,6 +264,7 @@ td:last-child {
   }
 }
 
+/* dice rotation animation */
 @keyframes rotate {
   from {
     transform: rotateY(0) rotateX(45deg) rotateZ(45deg);
@@ -251,6 +274,7 @@ td:last-child {
   }
 }
 
+/* shake animation on lose */
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -273,14 +297,15 @@ td:last-child {
   animation: shake 0.4s;
 }
 
+/* @media for responsive web width < 700 px */
 @media screen and (max-width: 700px) {
   .question {
     font-size: 8vw;
   }
-  .guess {
+  .guess-button {
     font-size: 5vw;
   }
-  .roll {
+  .roll-button {
     font-size: 5vw;
   }
 
@@ -303,14 +328,15 @@ td:last-child {
   }
 }
 
+/* @media for responsive web  700px < width < 1000px */
 @media screen and (min-width: 701px) and (max-width: 1000px) {
   .question {
     font-size: 6vw;
   }
-  .guess {
+  .guess-button {
     font-size: 4vw;
   }
-  .roll {
+  .roll-button {
     font-size: 5vw;
   }
 
@@ -333,14 +359,15 @@ td:last-child {
   }
 }
 
+/* @media for responsive web  1000px < width < 1300px */
 @media screen and (min-width: 1001px) and (max-width: 1300px) {
   .question {
     font-size: 5vw;
   }
-  .guess {
+  .guess-button {
     font-size: 3vw;
   }
-  .roll {
+  .roll-button {
     font-size: 3.5vw;
   }
 

@@ -2,31 +2,37 @@
 <html>
   <head>
     <title>Roll The Dice</title>
+    <!-- For using javasscript -->
     <script src="js/main.js" defer></script>
+    <!-- For using conffeti effect -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <!-- container 1, show target number and guess button lower/equal/higher -->
     <div class="container header">
       <div class="question">
         Will it be higher, lower, or equal to
+        <!-- target number -->
         <span id="number"></span>?
-        <div class="guess-button">
-          <button class="guess lower" onclick="selectResult('lower')">
+        <div class="guess">
+          <button class="guess-button lower" onclick="selectResult('lower')">
             lower
           </button>
-          <button class="guess equal" onclick="selectResult('equal')">
+          <button class="guess-button equal" onclick="selectResult('equal')">
             equal
           </button>
-          <button class="guess higher" onclick="selectResult('higher')">
+          <button class="guess-button higher" onclick="selectResult('higher')">
             higher
           </button>
         </div>
       </div>
     </div>
+    <!-- container 2, show roll result win/lose -->
     <div class="container result">
       <div class="roll-result"></div>
     </div>
+    <!-- container 3, show dice -->
     <div class="container">
       <div class="dice">
         <div class="side one"></div>
@@ -37,13 +43,13 @@
         <div class="side six"></div>
       </div>
     </div>
-
+    <!-- container 4, roll button  -->
     <div class="container controller">
-      <div class="dice-button">
-        <button class="roll" onclick="handleRoll()">Roll!!</button>
+      <div class="roll">
+        <button class="roll-button" onclick="handleRoll()">Roll!!</button>
       </div>
     </div>
-
+    <!-- container 5, history table -->
     <div class="container history">
       <table class="history-table">
         <thead>
