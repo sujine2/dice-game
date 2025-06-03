@@ -125,7 +125,7 @@ async function handleRoll() {
       // Change taget number
       setTimeout(() => {
         getRandomNumber();
-      }, 2000);
+      }, 1200);
     }, 1500);
   }, 200);
 }
