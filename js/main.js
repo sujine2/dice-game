@@ -1,7 +1,7 @@
 /* Tag constant value */
 const button = document.querySelector(".roll-button");
 const dice = document.querySelector(".dice");
-const result = document.querySelector(".result");
+const result = document.querySelector(".roll-result");
 const question = document.querySelector(".question");
 const tbody = document.querySelector(".history-table tbody");
 const table = document.querySelector(".history-table");
@@ -57,6 +57,7 @@ function selectResult(choice) {
 let initialized = false;
 let rollResult = null;
 async function handleRoll() {
+  // The guess (lose/equal/higher) cannot be changed while the dice is rolling
   document.querySelectorAll(".guess-button").forEach((btn) => {
     if (!btn.classList.contains(userGuess)) {
       btn.disabled = true;
@@ -88,9 +89,6 @@ async function handleRoll() {
       default:
         result.textContent = "";
     }
-    // console.log(
-    //   `result: ${rollResult}, select ${userGuess}, target: ${targetNum}`
-    // );
 
     setTimeout(() => {
       finalResult = isWin ? "Win" : "Lose";
@@ -117,7 +115,6 @@ async function handleRoll() {
       table.style.display = "block";
       addHistoryRow(userGuess, targetNum, rollResult, finalResult);
 
-      // The guess (lose/equal/higher) cannot be changed while the dice is rolling
       document.querySelectorAll(".guess-button").forEach((btn) => {
         btn.disabled = false;
       });
